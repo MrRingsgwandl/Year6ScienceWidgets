@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 6 Space Science Extension - Eagle Junction State School</title>
+    <!-- Tailwind CSS for utility styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons for vector interfaces -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #030712;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, .font-space {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        /* Interactive Card Hover Effects */
+        .gradient-border {
+            position: relative;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .gradient-border:hover {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.25) 0%, rgba(168, 85, 247, 0.25) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.35);
+        }
+
+        /* 3D Perspective Flip Cards */
+        .flip-card {
+            perspective: 1000px;
+        }
+        .flip-card-inner {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            backface-visibility: hidden;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between py-8 px-4 md:px-8 bg-[radial-gradient(circle_at_top_right,#0c152b_0%,#030712_100%)]">
+
+    <!-- ========================================== -->
+    <!-- PORTAL VIEW (Main Landing Page / index.html) -->
+    <!-- ========================================== -->
+    <div id="portal-view" class="w-full max-w-5xl mx-auto space-y-12">
+        
+        <!-- Header Banner Section -->
+        <div class="text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-6 border-b border-slate-800 pb-8">
+            <div>
+                <span class="bg-sky-500/10 text-sky-400 border border-sky-500/20 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase">Year 6 Earth & Space Unit</span>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight mt-3">Interactive Learning Portal</h1>
+                <p class="text-slate-400 text-md md:text-lg mt-2 font-light">Custom Classroom Physics Sandbox & Science Inquiry Dashboard</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-slate-500 text-xs font-mono font-semibold uppercase">EJSS Space Lab</span>
+                <div class="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center">
+                    <i data-lucide="orbit" class="w-6 h-6 text-sky-400 animate-pulse"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Portal Grid: Launcher Cards -->
+        <div class="space-y-4">
+            <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                <i data-lucide="layout-grid" class="w-5 h-5 text-sky-400"></i>
+                Interactive Slide Widgets
+            </h2>
+            <p class="text-xs text-slate-400">Select an interactive simulator below to launch it inside your web browser, or copy its specific URL link to embed it directly inside your Canva Presentation slides.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+                
+                <!-- Widget Card 1: Freefall -->
+                <div class="gradient-border border border-slate-800/80 p-6 flex flex-col justify-between h-72">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center mb-4">
+                            <i data-lucide="zap" class="w-5 h-5 text-rose-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Newton's Cannonball</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                            Demonstrates <strong>continuous freefall</strong> mechanics. Perfect for correcting 'zero gravity' space myths on Canva presentation slides.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between mt-6">
+                        <a href="#freefall" class="text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1.5 transition-colors">
+                            Launch Simulator <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <button onclick="copyEmbedLink('freefall')" class="text-slate-500 hover:text-slate-300 p-1.5 hover:bg-slate-800/50 rounded-lg transition-colors" title="Copy Canva Embed URL">
+                            <i data-lucide="link" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Widget Card 2: Sandbox -->
+                <div class="gradient-border border border-slate-800/80 p-6 flex flex-col justify-between h-72">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-4">
+                            <i data-lucide="sliders" class="w-5 h-5 text-purple-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Star Mass Sandbox</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                            Allows students to manipulate gravity variables. Tests how changes to mass instantly affect orbital paths and crash outcomes.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between mt-6">
+                        <a href="#sandbox" class="text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1.5 transition-colors">
+                            Launch Sandbox <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <button onclick="copyEmbedLink('sandbox')" class="text-slate-500 hover:text-slate-300 p-1.5 hover:bg-slate-800/50 rounded-lg transition-colors" title="Copy Canva Embed URL">
+                            <i data-lucide="link" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Widget Card 3: Vocab -->
+                <div class="gradient-border border border-slate-800/80 p-6 flex flex-col justify-between h-72">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-4">
+                            <i data-lucide="help-circle" class="w-5 h-5 text-emerald-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Translation Cards</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                            Interactive cards that translate complex space terms into Year 2 analogies. Directly targets the **"A" standard** communication criteria.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between mt-6">
+                        <a href="#vocab" class="text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1.5 transition-colors">
+                            Launch Flashcards <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <button onclick="copyEmbedLink('vocab')" class="text-slate-500 hover:text-slate-300 p-1.5 hover:bg-slate-800/50 rounded-lg transition-colors" title="Copy Canva Embed URL">
+                            <i data-lucide="link" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Teacher's Integration & Deployment Manual -->
+        <div class="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-6 md:p-8 space-y-6">
+            <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                <i data-lucide="book-open" class="w-5 h-5 text-purple-400"></i>
+                Teacher's Canva Integration Guide
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
+                <div class="space-y-4">
+                    <h4 class="text-sky-400 font-semibold uppercase tracking-wider text-xs">How to Embed inside Canva:</h4>
+                    <ol class="list-decimal list-inside space-y-3 text-slate-300 text-xs leading-relaxed">
+                        <li>
+                            Click the <i data-lucide="link" class="w-3.5 h-3.5 inline text-slate-400 mx-0.5"></i> link button on any card above to copy its unique, hash-routed GitHub Pages address.
+                        </li>
+                        <li>
+                            Open your presentation slides in <strong>Canva</strong>.
+                        </li>
+                        <li>
+                            Go to <strong>Apps</strong> on the left-side drawer, search for <strong>Embeds</strong>, and paste the copied URL address.
+                        </li>
+                        <li>
+                            Canva will load that exact widget onto your slide! Drag the frame to fit your slide layout. It remains fully clickable during your live lesson.
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="text-purple-400 font-semibold uppercase tracking-wider text-xs">EJSS Assessment Alignment Check:</h4>
+                    <ul class="space-y-3 text-slate-300 text-xs leading-relaxed">
+                        <li class="flex items-start gap-2.5">
+                            <i data-lucide="award" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <span><strong>Part A (Audience Adaptation):</strong> The Translation Cards (Tab 3) train students to avoid dry definitions and articulate orbit/gravity concepts to a Year 2 target audience.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i data-lucide="award" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <span><strong>Part B (Scientific Mechanics):</strong> Freefall and Star Mass variables (Tabs 1 & 2) provide simulation models proving gravity behaves cyclically and changes relative to mass inputs.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- ============================================== -->
+    <!-- WIDGET VIEW (Hash-routed Simulators Interface) -->
+    <!-- ============================================== -->
+    <div id="widget-view" class="w-full max-w-5xl mx-auto space-y-6 hidden">
+        
+        <!-- Header & Nav Bar Block -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-5">
+            <div class="flex items-center gap-3">
+                <a href="#home" class="flex items-center justify-center w-10 h-10 rounded-xl bg-slate-950/80 hover:bg-slate-900 border border-slate-800 transition-colors" title="Return to Home Portal">
+                    <i data-lucide="home" class="w-5 h-5 text-slate-400"></i>
+                </a>
+                <div>
+                    <span class="text-xs font-semibold text-sky-400 uppercase tracking-widest font-space">Classroom Simulator</span>
+                    <h1 class="text-2xl font-bold text-white tracking-tight mt-0.5">Gravity & Orbit Sandbox</h1>
+                </div>
+            </div>
+            
+            <!-- Navigation Tabs (Dynamic toggles) -->
+            <div class="flex flex-wrap gap-1.5 p-1 bg-slate-950/60 rounded-xl border border-slate-800/60 w-full md:w-auto">
+                <button onclick="switchTab('freefall')" id="tab-btn-freefall" class="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all">
+                    <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+                    Freefall Sim
+                </button>
+                <button onclick="switchTab('sandbox')" id="tab-btn-sandbox" class="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all">
+                    <i data-lucide="orbit" class="w-3.5 h-3.5"></i>
+                    Mass Sandbox
+                </button>
+                <button onclick="switchTab('vocab')" id="tab-btn-vocab" class="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all">
+                    <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
+                    Vocab Cards
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 1: CONTINUOUS FREEFALL ==================== -->
+        <div id="panel-freefall" class="tab-panel hidden flex-col md:flex-row gap-6 items-center">
+            <!-- Controls Panel -->
+            <div class="w-full md:w-5/12 flex flex-col justify-between space-y-5">
+                <div>
+                    <span class="text-xs font-semibold text-sky-400 uppercase tracking-widest font-space">Newton's Cannonball Demonstration</span>
+                    <h2 class="text-2xl font-bold text-white mt-1 leading-tight">Defining Continuous Freefall</h2>
+                    <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                        Experiment with different launch speeds to observe how forward motion balances gravity.
+                    </p>
+                </div>
+
+                <!-- Launcher Buttons -->
+                <div class="flex flex-col gap-2.5">
+                    <button onclick="launchCannonball('low')" class="flex justify-between items-center px-4 py-3.5 bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-rose-500/30 rounded-xl text-sm font-semibold transition-all text-left">
+                        <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-rose-500"></span> 1. Low Velocity</span>
+                        <span class="text-rose-400 text-xs font-mono font-bold">Hits Earth</span>
+                    </button>
+                    <button onclick="launchCannonball('medium')" class="flex justify-between items-center px-4 py-3.5 bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-amber-500/30 rounded-xl text-sm font-semibold transition-all text-left">
+                        <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-amber-500"></span> 2. Medium Velocity</span>
+                        <span class="text-amber-400 text-xs font-mono font-bold">Over Horizon</span>
+                    </button>
+                    <button onclick="launchCannonball('orbital')" class="flex justify-between items-center px-4 py-3.5 bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-emerald-500/30 rounded-xl text-sm font-semibold transition-all text-left">
+                        <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> 3. Orbital Velocity</span>
+                        <span class="text-emerald-400 text-xs font-mono font-bold">Continuous Freefall</span>
+                    </button>
+                </div>
+
+                <!-- Concept Callout -->
+                <div class="p-4 rounded-xl bg-sky-950/20 border border-sky-500/10 text-xs text-sky-300 leading-relaxed flex gap-3 items-start">
+                    <i data-lucide="info" class="w-5 h-5 shrink-0 text-sky-400"></i>
+                    <span><strong>Year 6 Key Concept:</strong> Astronauts do not float because there is zero gravity. They float because they and their spaceship are falling together in a permanent curved path.</span>
+                </div>
+            </div>
+
+            <!-- Physics Canvas -->
+            <div class="w-full md:w-7/12 bg-slate-950/80 border border-slate-850 rounded-xl p-4 flex flex-col items-center relative min-h-[320px] justify-center">
+                <span id="cannon-status" class="absolute top-4 right-4 text-[10px] text-slate-500 font-mono uppercase tracking-widest font-semibold">Ready to Fire</span>
+                <canvas id="cannonCanvas" width="400" height="280" class="w-full h-auto max-w-full rounded-lg bg-slate-950/40 border border-slate-900"></canvas>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 2: STAR MASS SANDBOX ==================== -->
+        <div id="panel-sandbox" class="tab-panel hidden flex-col md:flex-row gap-6 items-center">
+            <!-- Sandbox Controls -->
+            <div class="w-full md:w-5/12 flex flex-col justify-between space-y-5">
+                <div>
+                    <span class="text-xs font-semibold text-purple-400 uppercase tracking-widest font-space">Inquiry Variables Exploration</span>
+                    <h2 class="text-2xl font-bold text-white mt-1 leading-tight">Altering Star Mass</h2>
+                    <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                        Isolate and test your variables. What happens to Earth's stable orbit if the star's central gravity changes instantly?
+                    </p>
+                </div>
+
+                <!-- Mass Presets -->
+                <div class="p-4 bg-slate-950 rounded-xl border border-slate-850 space-y-3">
+                    <span class="text-xs text-slate-400 uppercase tracking-wider font-mono font-semibold">Alter Solar Mass:</span>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="changeSandboxMass('half')" id="btn-half" class="py-2.5 bg-slate-900 border border-slate-800 hover:border-purple-500/30 rounded-lg text-xs font-semibold text-slate-300 transition-all">0.5x Mass</button>
+                        <button onclick="changeSandboxMass('normal')" id="btn-normal" class="py-2.5 bg-purple-500/20 border border-purple-500/30 rounded-lg text-xs font-bold text-purple-400 transition-all">Normal</button>
+                        <button onclick="changeSandboxMass('double')" id="btn-double" class="py-2.5 bg-slate-900 border border-slate-800 hover:border-purple-500/30 rounded-lg text-xs font-semibold text-slate-300 transition-all">2.0x Mass</button>
+                    </div>
+                </div>
+
+                <!-- Scientific Inquiry Thought Prompt -->
+                <div class="p-4 rounded-xl bg-purple-950/20 border border-purple-500/10 text-xs text-purple-300 leading-relaxed flex gap-3 items-start">
+                    <i data-lucide="help-circle" class="w-5 h-5 shrink-0 text-purple-400"></i>
+                    <span><strong>Thought Experiment:</strong> If the pull of gravity suddenly doubles, why does the planet need to travel faster to stay in balance? Formulate your hypothesis.</span>
+                </div>
+            </div>
+
+            <!-- Orbit Canvas -->
+            <div class="w-full md:w-7/12 bg-slate-950/80 border border-slate-850 rounded-xl p-4 flex flex-col items-center relative min-h-[320px] justify-center">
+                <span id="sandbox-status" class="absolute top-4 right-4 text-[10px] text-slate-500 font-mono uppercase tracking-widest font-semibold">Normal Orbit Track</span>
+                <canvas id="sandboxCanvas" width="400" height="280" class="w-full h-auto max-w-full rounded-lg bg-slate-950/40 border border-slate-900"></canvas>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 3: TRANSLATION FLIP CARDS ==================== -->
+        <div id="panel-vocab" class="tab-panel hidden flex-col gap-6">
+            <div>
+                <span class="text-xs font-semibold text-sky-400 uppercase tracking-widest font-space">Assessment Rubric: Communication Focus</span>
+                <h2 class="text-2xl font-bold text-white mt-1 leading-tight">Translation Challenge (Audience Calibration)</h2>
+                <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                    Click any complex space science term card below to flip it. Practice explaining these mechanics clearly to a Year 2 student audience!
+                </p>
+            </div>
+
+            <!-- 3-Column Touch Card Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 py-2">
+                
+                <!-- Card 1: Inertia -->
+                <div class="flip-card w-full h-44 cursor-pointer" onclick="flipCard(this)">
+                    <div class="flip-card-inner relative w-full h-full duration-500">
+                        <!-- Front -->
+                        <div class="flip-card-front bg-slate-950 hover:bg-slate-900 border border-slate-850 rounded-2xl p-5 flex flex-col justify-between items-center text-center shadow-lg transition-all">
+                            <span class="text-[9px] font-mono text-rose-400 uppercase tracking-widest font-bold">Scientific Term</span>
+                            <span class="text-2xl font-bold text-white tracking-tight">INERTIA</span>
+                            <span class="text-[9px] text-slate-500 font-semibold flex items-center gap-1"><i data-lucide="help-circle" class="w-3 h-3"></i> Tap Card to Flip</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="flip-card-back bg-emerald-950/95 border border-emerald-800 rounded-2xl p-5 flex flex-col justify-between items-center text-center shadow-lg">
+                            <span class="text-[9px] font-mono text-emerald-400 uppercase tracking-widest font-bold">Year 2 Analogy</span>
+                            <p class="text-slate-200 text-xs leading-relaxed">
+                                "The planet's forward zoom-speed—it keeps trying to escape in a straight line out into deep, dark space!"
+                            </p>
+                            <span class="text-[9px] text-emerald-400 font-bold uppercase tracking-wider">Model Reference</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Gravity -->
+                <div class="flip-card w-full h-44 cursor-pointer" onclick="flipCard(this)">
+                    <div class="flip-card-inner relative w-full h-full duration-500">
+                        <!-- Front -->
+                        <div class="flip-card-front bg-slate-950 hover:bg-slate-900 border border-slate-850 rounded-2xl p-5 flex flex-col justify-between items-center text-center shadow-lg transition-all">
+                            <span class="text-[9px] font-mono text-rose-400 uppercase tracking-widest font-bold">Scientific Term</span>
+                            <span class="text-2xl font-bold text-white tracking-tight">GRAVITY</span>
+                            <span class="text-[9px] text-slate-500 font-semibold flex items-center gap-1"><i data-lucide="help-circle" class="w-3 h-3"></i> Tap Card to Flip</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="flip-card-back bg-emerald-950/95 border border-emerald-800 rounded-2xl p-5 flex flex-col justify-between items-center text-center shadow-lg">
+                            <span class="text-[9px] font-mono text-emerald-400 uppercase tracking-widest font-bold">Year 2 Analogy</span>
+                            <p class="text-slate-200 text-xs leading-relaxed">
+                                "The invisible cosmic magnet pulling the planet tightly inward to keep it anchored to the Sun."
+                            </p>
+                            <span class="text-[9px] text-emerald-400 font-bold uppercase tracking-wider">Model Reference</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Orbit -->
+                <div class="flip-card w-full h-44 cursor-pointer" onclick="flipCard(this)">
+                    <div class="flip-card-inner relative w-full h-full duration-500">
+                        <!-- Front -->
+                        <div class="flip-card-front bg-slate-950 hover:bg-slate-900 border border-slate-850 rounded-2xl p-5 flex flex-col justify-between items-center text-center shadow-lg transition-all">
+                            <span class="text-[9px] font-mono text-rose-400 uppercase tracking-widest font-bold">Scientific Term</span>
+                            <span class="text-2xl font-bold text-white tracking-tight">ORBIT</span>
+                            <span class="text-[9px] text-slate-500 font-semibold flex items-center gap-1"><i data-lucide="help-circle" class="w-3 h-3"></i> Tap Card to Flip</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="flip-card-back bg-emerald-950/95 border border-emerald-800 rounded-2xl p-5 flex flex-col justify-between items-center text-center shadow-lg">
+                            <span class="text-[9px] font-mono text-emerald-400 uppercase tracking-widest font-bold">Year 2 Analogy</span>
+                            <p class="text-slate-200 text-xs leading-relaxed">
+                                "The perfect curved racetrack made when the forward speed and the inward pull are balanced together."
+                            </p>
+                            <span class="text-[9px] text-emerald-400 font-bold uppercase tracking-wider">Model Reference</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="p-3 bg-slate-950/40 border border-slate-850 rounded-xl text-[10px] text-slate-500 text-center leading-relaxed font-mono">
+                💡 Communicating science vocabulary effectively is key to achieving an "A" on the presentation rubric.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Custom Copy Toast Notice -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-slate-950 border border-emerald-500/30 text-emerald-400 px-4 py-2.5 rounded-xl text-xs font-semibold shadow-2xl flex items-center gap-2 opacity-0 transform translate-y-2 pointer-events-none transition-all duration-300">
+        <i data-lucide="check" class="w-4 h-4"></i>
+        <span id="toast-msg">Link copied to clipboard!</span>
+    </div>
+
+    <!-- Footer Specs -->
+    <footer class="w-full text-center mt-12 text-[10px] text-slate-600 font-mono">
+        <span>Eagle Junction State School Space Laboratory • Deploy Engine Live</span>
+    </footer>
+
+    <!-- Interface & Physics Simulators Logic -->
+    <script>
+        let currentTab = '';
+        
+        // Physics Simulation Variables
+        let cannonCanvas, cannonCtx, cannonFrameId;
+        let sandboxCanvas, sandboxCtx, sandboxFrameId;
+        let sandboxMassMode = 'normal';
+
+        // URL hash router to toggle views and trigger dashboard tabs
+        function router() {
+            const hash = window.location.hash;
+            const portalView = document.getElementById('portal-view');
+            const widgetView = document.getElementById('widget-view');
+
+            stopAllAnimations();
+
+            if (!hash || hash === '#home' || hash === '#index') {
+                // Show index page
+                portalView.classList.remove('hidden');
+                widgetView.classList.add('hidden');
+            } else {
+                // Show widget page
+                portalView.classList.add('hidden');
+                widgetView.classList.remove('hidden');
+
+                if (hash === '#freefall') {
+                    switchTab('freefall');
+                } else if (hash === '#sandbox') {
+                    switchTab('sandbox');
+                } else if (hash === '#vocab') {
+                    switchTab('vocab');
+                }
+            }
+        }
+
+        // Switch tabs manually on the dashboard
+        function switchTab(tabId) {
+            if (currentTab === tabId) return;
+            
+            const tabs = ['freefall', 'sandbox', 'vocab'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-btn-${t}`);
+                const panel = document.getElementById(`panel-${t}`);
+                
+                if (t === tabId) {
+                    btn.className = "flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-sky-500/10 border border-sky-500/20 text-sky-400 rounded-lg text-xs font-semibold transition-all";
+                    panel.classList.remove('hidden');
+                    panel.classList.add('flex');
+                } else {
+                    btn.className = "flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 hover:bg-slate-900 text-slate-400 hover:text-slate-200 rounded-lg text-xs font-semibold transition-all";
+                    panel.classList.add('hidden');
+                    panel.classList.remove('flex');
+                }
+            });
+
+            stopAllAnimations();
+            currentTab = tabId;
+
+            // Trigger specific animations on demand
+            if (tabId === 'freefall') {
+                setTimeout(initCannonCanvas, 50);
+            } else if (tabId === 'sandbox') {
+                setTimeout(initSandboxCanvas, 50);
+            }
+        }
+
+        function stopAllAnimations() {
+            if (cannonFrameId) cancelAnimationFrame(cannonFrameId);
+            if (sandboxFrameId) cancelAnimationFrame(sandboxFrameId);
+        }
+
+        // Clipboard Copy Logic with Toast Notifier
+        function copyEmbedLink(hashType) {
+            const baseUrl = window.location.href.split('#')[0];
+            const embedUrl = `${baseUrl}#${hashType}`;
+
+            const tempInput = document.createElement('input');
+            tempInput.value = embedUrl;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            // Pop toast alert
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = `Copied #${hashType} Canva link!`;
+            toast.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none');
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none');
+            }, 2500);
+        }
+
+        // ==================== WIDGET 1: NEWTON CANNONBALL LOGIC ====================
+        function initCannonCanvas() {
+            cannonCanvas = document.getElementById('cannonCanvas');
+            cannonCtx = cannonCanvas.getContext('2d');
+            resetCannonScene();
+        }
+
+        function resetCannonScene() {
+            if (cannonFrameId) cancelAnimationFrame(cannonFrameId);
+            cannonCtx.clearRect(0, 0, cannonCanvas.width, cannonCanvas.height);
+            
+            // Draw Earth
+            cannonCtx.beginPath();
+            cannonCtx.arc(200, 150, 55, 0, 2 * Math.PI);
+            cannonCtx.fillStyle = "#3b82f6";
+            cannonCtx.fill();
+            cannonCtx.lineWidth = 2;
+            cannonCtx.strokeStyle = "#1d4ed8";
+            cannonCtx.stroke();
+
+            // Draw Mountain Cannon Base
+            cannonCtx.beginPath();
+            cannonCtx.moveTo(194, 95);
+            cannonCtx.lineTo(200, 82);
+            cannonCtx.lineTo(206, 95);
+            cannonCtx.fillStyle = "#64748b";
+            cannonCtx.fill();
+        }
+
+        function launchCannonball(speedType) {
+            resetCannonScene();
+            document.getElementById('cannon-status').textContent = "Tracking " + speedType + " velocity...";
+            
+            let x = 200;
+            let y = 81;
+            let vx = 0;
+            let vy = 0;
+            let path = [];
+
+            if (speedType === 'low') {
+                vx = 1.35;
+                vy = -0.3;
+            } else if (speedType === 'medium') {
+                vx = 2.6;
+                vy = -0.5;
+            } else if (speedType === 'orbital') {
+                vx = 3.9;
+                vy = 0;
+            }
+
+            const earthX = 200;
+            const earthY = 150;
+            const earthR = 55;
+
+            function animate() {
+                const dx = x - earthX;
+                const dy = y - earthY;
+                const distance = Math.sqrt(dx*dx + dy*dy);
+
+                if (distance < earthR) {
+                    document.getElementById('cannon-status').textContent = "Impact Detected!";
+                    return;
+                }
+
+                const gravityStrength = 0.17;
+                const ax = -gravityStrength * (dx / distance);
+                const ay = -gravityStrength * (dy / distance);
+
+                vx += ax;
+                vy += ay;
+                x += vx;
+                y += vy;
+
+                path.push({x: x, y: y});
+
+                cannonCtx.clearRect(0, 0, cannonCanvas.width, cannonCanvas.height);
+
+                // Draw Earth
+                cannonCtx.beginPath();
+                cannonCtx.arc(earthX, earthY, earthR, 0, 2 * Math.PI);
+                cannonCtx.fillStyle = "#1e40af";
+                cannonCtx.fill();
+                cannonCtx.strokeStyle = "#1d4ed8";
+                cannonCtx.stroke();
+
+                // Draw Track path line
+                cannonCtx.beginPath();
+                cannonCtx.moveTo(200, 81);
+                path.forEach(p => cannonCtx.lineTo(p.x, p.y));
+                cannonCtx.strokeStyle = speedType === 'orbital' ? '#10b981' : (speedType === 'medium' ? '#f59e0b' : '#f43f5e');
+                cannonCtx.lineWidth = 2;
+                cannonCtx.stroke();
+
+                // Draw Cannonball
+                cannonCtx.beginPath();
+                cannonCtx.arc(x, y, 4, 0, 2 * Math.PI);
+                cannonCtx.fillStyle = "#facc15";
+                cannonCtx.fill();
+
+                if (speedType === 'orbital' && path.length > 300) {
+                    path.shift();
+                }
+
+                cannonFrameId = requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // ==================== WIDGET 2: STAR MASS SANDBOX LOGIC ====================
+        function initSandboxCanvas() {
+            sandboxCanvas = document.getElementById('sandboxCanvas');
+            sandboxCtx = sandboxCanvas.getContext('2d');
+            runSandboxOrbit();
+        }
+
+        function changeSandboxMass(mode) {
+            sandboxMassMode = mode;
+            const status = document.getElementById('sandbox-status');
+            
+            const buttons = ['half', 'normal', 'double'];
+            buttons.forEach(b => {
+                const el = document.getElementById(`btn-${b}`);
+                if (b === mode) {
+                    el.className = "py-2.5 bg-purple-500/20 border border-purple-500/30 rounded-lg text-xs font-bold text-purple-400 transition-all";
+                } else {
+                    el.className = "py-2.5 bg-slate-900 border border-slate-800 hover:border-purple-500/30 rounded-lg text-xs font-semibold text-slate-300 transition-all";
+                }
+            });
+
+            if (mode === 'half') {
+                status.textContent = "Weak Gravity: Spiral Outward";
+            } else if (mode === 'normal') {
+                status.textContent = "Normal Orbit Track";
+            } else if (mode === 'double') {
+                status.textContent = "Strong Gravity: Spiral Decay Collapse";
+            }
+            runSandboxOrbit();
+        }
+
+        function runSandboxOrbit() {
+            if (sandboxFrameId) cancelAnimationFrame(sandboxFrameId);
+            sandboxCtx.clearRect(0, 0, sandboxCanvas.width, sandboxCanvas.height);
+
+            let angle = 0;
+            let x = 200;
+            let y = 140;
+            let radius = 70;
+            let orbitPath = [];
+
+            function animate() {
+                sandboxCtx.clearRect(0, 0, sandboxCanvas.width, sandboxCanvas.height);
+
+                let starRadius = 14;
+                let starColor = "#facc15";
+                
+                if (sandboxMassMode === 'half') {
+                    starRadius = 8;
+                    starColor = "#f97316";
+                } else if (sandboxMassMode === 'double') {
+                    starRadius = 22;
+                    starColor = "#38bdf8";
+                }
+
+                // Draw central solar mass
+                sandboxCtx.beginPath();
+                sandboxCtx.arc(200, 140, starRadius, 0, 2 * Math.PI);
+                sandboxCtx.fillStyle = starColor;
+                sandboxCtx.fill();
+
+                if (sandboxMassMode === 'normal') {
+                    angle += 0.025;
+                    x = 200 + radius * Math.cos(angle);
+                    y = 140 + radius * Math.sin(angle);
+                } else if (sandboxMassMode === 'half') {
+                    radius += 0.6;
+                    angle += 0.02;
+                    x = 200 + radius * Math.cos(angle);
+                    y = 140 + radius * Math.sin(angle);
+                } else if (sandboxMassMode === 'double') {
+                    radius -= 0.42;
+                    angle += 0.038;
+                    if (radius < starRadius) {
+                        sandboxCtx.fillStyle = "#f43f5e";
+                        sandboxCtx.font = "bold 14px monospace";
+                        sandboxCtx.textAlign = "center";
+                        sandboxCtx.fillText("COLLISION IMPACT!", 200, 145);
+                        return;
+                    }
+                    x = 200 + radius * Math.cos(angle);
+                    y = 140 + radius * Math.sin(angle);
+                }
+
+                orbitPath.push({x: x, y: y});
+                if (orbitPath.length > 200) orbitPath.shift();
+
+                // Draw orbiting trajectory line
+                sandboxCtx.beginPath();
+                sandboxCtx.moveTo(orbitPath[0].x, orbitPath[0].y);
+                orbitPath.forEach(p => sandboxCtx.lineTo(p.x, p.y));
+                sandboxCtx.strokeStyle = "rgba(56, 189, 248, 0.25)";
+                sandboxCtx.lineWidth = 1.5;
+                sandboxCtx.stroke();
+
+                // Draw orbiting planet
+                sandboxCtx.beginPath();
+                sandboxCtx.arc(x, y, 6, 0, 2 * Math.PI);
+                sandboxCtx.fillStyle = "#3b82f6";
+                sandboxCtx.fill();
+
+                sandboxFrameId = requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // ==================== TAB 3: TRANSLATION FLIP CARDS LOGIC ====================
+        function flipCard(cardElement) {
+            cardElement.classList.toggle('flipped');
+        }
+
+        // Listen for browser changes to support direct Canva Hash URLs
+        window.addEventListener('hashchange', router);
+        window.addEventListener('load', () => {
+            lucide.createIcons();
+            router();
+        });
+    </script>
+</body>
+</html>
